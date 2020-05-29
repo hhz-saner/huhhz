@@ -1,16 +1,3 @@
-FROM composer as composer
-COPY database/ /app/database/
-COPY composer.json composer.lock /app/
-RUN cd /app \
-      && composer install \
-           --optimize-autoloader \
-           --ignore-platform-reqs \
-           --prefer-dist \
-           --no-interaction \
-           --no-plugins \
-           --no-scripts \
-           --no-dev
-
 FROM php:7.4-fpm
 RUN set -eux; \
     apt-get update; \

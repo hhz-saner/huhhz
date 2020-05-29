@@ -57,13 +57,9 @@ RUN set -xe; \
     php -m | grep -q 'zip'
 
 # Install Php Redis Extension
-RUN if [ $(php -r "echo PHP_MAJOR_VERSION;") = "5" ]; then \
-      pecl install -o -f redis-4.3.0; \
-    else \
-      pecl install -o -f redis; \
-    fi \
-    && rm -rf /tmp/pear \
-    && docker-php-ext-enable redis
+RUN pecl install -o -f redis  && \
+    rm -rf /tmp/pear  && \
+    docker-php-ext-enable redis
 
 
 ###########################################################################
@@ -92,7 +88,7 @@ RUN apt-get clean && \
 ARG LOCALE=POSIX
 ENV LC_ALL en_US.UTF-8
 
-ADD . /var/www/html/
+COPY . /var/www/html/
 COPY --from=composer /app/vendor/ /var/www/html/vendor/
 
 WORKDIR /var/www/html

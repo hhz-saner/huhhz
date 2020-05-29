@@ -92,7 +92,7 @@ RUN apt-get clean && \
 ARG LOCALE=POSIX
 ENV LC_ALL en_US.UTF-8
 
-ADD . /var/www/html
+ADD . /var/www/html/
 COPY --from=composer /app/vendor/ /var/www/html/vendor/
 
 WORKDIR /var/www/html

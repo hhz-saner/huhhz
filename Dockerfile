@@ -86,13 +86,11 @@ RUN apt-get clean && \
 
 # Configure locale.
 ARG LOCALE=POSIX
-ENV LC_ALL en_US.UTF-8
-
 
 WORKDIR /var/www/html
 
-COPY . /var/www/html/
-COPY --from=composer /app/vendor/ /var/www/html/vendor/
+COPY . /app
+COPY --from=composer /app/vendor/ /app/vendor/
 
 CMD ["php-fpm"]
 

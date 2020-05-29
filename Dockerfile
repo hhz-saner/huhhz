@@ -88,10 +88,11 @@ RUN apt-get clean && \
 ARG LOCALE=POSIX
 ENV LC_ALL en_US.UTF-8
 
-COPY . /var/www/html/
-COPY --from=composer /app/vendor/ /var/www/html/vendor/
 
 WORKDIR /var/www/html
+
+COPY . /var/www/html/
+COPY --from=composer /app/vendor/ /var/www/html/vendor/
 
 CMD ["php-fpm"]
 
